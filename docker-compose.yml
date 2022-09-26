@@ -1,0 +1,40 @@
+version: "3.9"
+services:
+    web:
+        build: .
+        ports:
+            - "80:80"
+        volumes:
+            - "./src:/var/www/html"
+
+    mysql:
+        image: "mysql:5.7.22"
+        ports:
+            - "3306:3306"
+        environment:
+            MYSQL_ROOT_PASSWORD: 123456
+            MYSQL_ROOT_HOST: "%"
+            MYSQL_DATABASE: "nutritional_facts"
+            MYSQL_USER: "facts"
+            MYSQL_PASSWORD: "facts123456"
+            MYSQL_ALLOW_EMPTY_PASSWORD: 1
+        
+        # Sobre as configurações do banco de dados, é importante frisar que 
+        # o correto seria criar um arquivo .env (não versionado) com estes 
+        # parâmetros e então definir as variáveis da seguinte forma:
+        #
+        # environment:
+        #    MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+        #    MYSQL_ROOT_HOST: "%"
+        #    MYSQL_DATABASE: '${DB_DATABASE}'
+        #    MYSQL_USER: '${DB_USERNAME}'
+        #    MYSQL_PASSWORD: '${DB_PASSWORD}'
+        #    MYSQL_ALLOW_EMPTY_PASSWORD: 1
+        #
+        # Isso é necessário a fim de evitar que as credenciais sejam versionadas
+        # juntamente com o repositório, o que seria uma grave falha de segurança.
+        # 
+        # Optei por não seguir esta prática aqui apenas para facilitar a execução
+        # do programa por parte dos examinadores, pois este programa é apenas um
+        # desafio simples, que não será implantado em produção.
+
