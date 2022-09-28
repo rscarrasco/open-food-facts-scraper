@@ -21,17 +21,17 @@ function connect($config){
 function create_table_if_not_exists($connection){
     $sql = <<<SQL
 CREATE TABLE IF NOT EXISTS products(
-    code         VARCHAR(14)                NOT NULL,
-    barcode      VARCHAR(30),
+    code         VARCHAR(30)                NOT NULL,
+    barcode      VARCHAR(60),
     status       ENUM('draft', 'imported'),
     imported_t   DATETIME,
-    url          VARCHAR(120),
-    product_name VARCHAR(200),
-    quantity     VARCHAR(20),
-    categories   VARCHAR(200),
-    packaging    VARCHAR(50),
-    brands       VARCHAR(30),
-    image_url    VARCHAR(200),
+    url          VARCHAR(250),
+    product_name VARCHAR(400),
+    quantity     VARCHAR(60),
+    categories   VARCHAR(400),
+    packaging    VARCHAR(400),
+    brands       VARCHAR(60),
+    image_url    VARCHAR(250),
     UNIQUE(code)
 );
 SQL;
