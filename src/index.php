@@ -29,15 +29,16 @@ $_GET = array_merge(getQueryStringParameters($request_uri), $_GET);
 $endpoint = $_GET['code'] ? '/products' : $path;
 
 switch($endpoint){
-    case '/'        : require('./api/get-root.php'); 
-                      break;
+    case '/'              : require('./api/get-root.php'); 
+                            break;
 
-    case '/products': $_GET['code'] ? require('./api/get-single-product.php') : require('./api/get-all-products.php');
-                      break;
+    case '/products'      : $_GET['code'] ? require('./api/get-single-product.php') : require('./api/get-all-products.php');
+                            break;
 
-    case '/cron'    : require('./cron.php');
-                      break;
+    case '/cron'          : require('./cron.php');
+                            break;
 
-    default         : http_response_code(404) ;
+    case '/docs/api.yml' : require('./api/docs.php'); break; 
+    default              : http_response_code(404) ;
 }
 

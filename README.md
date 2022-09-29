@@ -32,6 +32,8 @@ As rotas existentes são:
     informações do produto com código 123.
   * [/cron](http://localhost/index.php/cron): dispara script que raspa
     os dados do Open Food Facts.
+  * [/docs/api.yml](http://localhost/index.php/docs/api.yml): aponta para o 
+    arquivo Open API que descreve a API deste sistema.
 
 ## Ressalvas quanto à imagem utilizada
 
