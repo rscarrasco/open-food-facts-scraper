@@ -5,6 +5,9 @@
 Este projeto implementa uma API REST para o [Open Food Facts](https://world.openfoodfacts.org/)
 utilizando PHP, sem nenhum framework.
 
+Uma explicação rápida deste projeto em vídeo pode ser encontrada 
+[aqui](https://www.loom.com/share/682ae9e26b7947a0bdb74280b67b077e).
+
 ## Execução
 
 Para levantar a infraestrutura do sistema, utilize o Docker Compose:
