@@ -38,6 +38,24 @@ class Product {
         $this->isUnset = false;
     }
 
+    public function getData(){
+        $data = array();
+
+        $data['code']         = $this->code;
+        $data['barcode']      = $this->barcode;
+        $data['status']       = $this->status;
+        $data['imported_t']   = $this->imported_t;
+        $data['url']          = $this->url;
+        $data['product_name'] = $this->product_name;
+        $data['quantity']     = $this->quantity;
+        $data['categories']   = $this->categories;
+        $data['packaging']    = $this->packaging;
+        $data['brands']       = $this->brands;
+        $data['image_url']    = $this->image_url;
+        
+        return $data;
+    }
+
     private function buildStoreQuery(){
         return <<<SQL
 INSERT INTO $this->table (
@@ -89,6 +107,19 @@ SQL;
         }
        $sql = $this->buildStoreQuery();
        Product::$connection->exec($sql);
+    }
+
+    public static function fetchSingle($code){
+        $sql = "SELECT * FROM products WHERE code = '$code'";
+        $stmt= Product::$connection->query($sql);
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        if($row){
+            $result = new Product();
+            $result->setData($row);
+            return $result;
+       } 
+       return false;
     }
 }
 
