@@ -4,3 +4,70 @@ info:
   description: CRUD Products
   version: '0.1'
 
+paths:
+  /:
+    get:
+      summary: Retorna mensagem de apresentação do sistema
+      operationId: root
+      tags:
+        - system
+      responses:
+        200:
+          description: Exibe a mensagem
+
+  /products:
+    get:
+      summary: Obtém todos os produtos, com paginação
+      operationId: listAllProducts
+      tags:
+        - product
+      parameters:
+        - name: limit
+          in: query
+          description: Quantos itens devem ser recuperados de cada vez.
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: start 
+          in: query
+          description: Quantos itens devem ser pulados (offset); 
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        200:
+          description: Retorna os produtos
+        400:
+          description: Parâmetro start não pode ser menor que 0. Parâmetro limit não pode ser menor ou igual a 0
+
+  /products/{productCode}:
+    get:
+      summary: Obtém um único item, com base em seu código.
+      operationId: fetchSingleProduct
+      tags:
+        - product
+      parameters:
+        - name: code
+          in: path
+          description: O código do produto desejado
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        200:
+          description: Retorna o produto
+        400:
+          description: Código do produto não informado
+  /cron:
+    get:
+      summary: Executa operações recorrentes
+      operationId: cron
+      tags:
+        - system
+      responses:
+        200:
+          description: Operações realizadas
+
