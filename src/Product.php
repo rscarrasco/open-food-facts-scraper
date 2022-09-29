@@ -121,5 +121,18 @@ SQL;
        } 
        return false;
     }
+
+    public static function fetchAll($start, $limit){
+        $sql = "SELECT * FROM products LIMIT $start,$limit";
+        $stmt= Product::$connection->query($sql);
+        $stmt->execute();
+        $result = array();
+        while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+           $product = new Product();
+           $product->setData($row);
+           $result[] = $product;
+        }
+        return $result;
+    }
 }
 
